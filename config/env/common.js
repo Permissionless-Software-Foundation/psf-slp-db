@@ -44,7 +44,7 @@ export default {
     : 'emailpassword',
 
   // Enable or Disable the usage of Mongo DB.
-  noMongo: process.env.NO_MONGO ? true : false,
+  noMongo: process.env.NO_MONGO ? false : true,
 
   // BEGIN WALLET CONFIGURATION
 
