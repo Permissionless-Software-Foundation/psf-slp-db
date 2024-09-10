@@ -11,10 +11,10 @@ import * as url from 'url'
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 class LevelDb {
-  constructor (localConfig = {}) {
-    // Encapsulate dependencies
-    // this.level = level
-  }
+  // constructor (localConfig = {}) {
+  //   // Encapsulate dependencies
+  //   // this.level = level
+  // }
 
   openDbs () {
     // Instantiate LevelDB databases
