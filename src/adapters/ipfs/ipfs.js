@@ -154,7 +154,7 @@ class IpfsAdapter {
       // Configure services
       const services = {
         identify: identify(),
-        pubsub: gossipsub({ allowPublishToZeroPeers: true })
+        pubsub: gossipsub({ allowPublishToZeroTopicPeers: true })
       }
       if (this.config.isCircuitRelay) {
         console.log('Helia (IPFS) node IS configured as Circuit Relay')
@@ -175,25 +175,15 @@ class IpfsAdapter {
         console.log('Helia (IPFS) node IS NOT configured as Circuit Relay')
       }
 
-      // Configure transports
-      let transports
-      if (process.env.CONNECT_PREF === 'direct') {
-        transports = [
-          tcp(),
-          webSockets(),
-          webRTC()
-        ]
-      } else {
-        transports = [
-          tcp(),
-          webSockets(),
-          circuitRelayTransport({
-            discoverRelays: 3,
-            reservationConcurrency: 3
-          }),
-          webRTC()
-        ]
-      }
+      const transports = [
+        tcp(),
+        webSockets(),
+        circuitRelayTransport({
+          discoverRelays: 3,
+          reservationConcurrency: 3
+        }),
+        webRTC()
+      ]
 
       // libp2p is the networking layer that underpins Helia
       const libp2p = await this.createLibp2p({
@@ -253,6 +243,8 @@ class IpfsAdapter {
       !this.fs.existsSync(`${IPFS_DIR}/blockstore`) && this.fs.mkdirSync(`${IPFS_DIR}/blockstore`)
 
       !this.fs.existsSync(`${IPFS_DIR}/datastore`) && this.fs.mkdirSync(`${IPFS_DIR}/datastore`)
+
+      // !fs.existsSync(`${IPFS_DIR}/datastore/peers`) && fs.mkdirSync(`${IPFS_DIR}/datastore/peers`)
 
       return true
     } catch (err) {
