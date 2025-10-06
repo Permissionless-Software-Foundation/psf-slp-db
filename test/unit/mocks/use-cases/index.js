@@ -31,12 +31,39 @@ class UserUseCaseMock {
   }
 }
 
+class UsageUseCaseMock {
+  async cleanUsage() {
+    return {}
+  }
+
+  async getRestSummary() {
+    return true
+  }
+
+  async getTopIps(params) {
+    return true
+  }
+
+  async getTopEndpoints(existingUser, newData) {
+    return true
+  }
+
+  async clearUsage() {
+    return true
+  }
+
+  async saveUsage() {
+    return true
+  }
+}
+
 class UseCasesMock {
   constuctor(localConfig = {}) {
     // this.user = new UserUseCaseMock(localConfig)
   }
 
   user = new UserUseCaseMock()
+  usage = new UsageUseCaseMock()
 }
 
 export default UseCasesMock;

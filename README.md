@@ -10,8 +10,8 @@ The purpose of this code repository is to allow optimizations for parallel proce
 
 ## Requirements
 
-- node **^20.16.0**
-- npm **^10.8.1**
+- node **^22.20.0**
+- npm **^10.9.3**
 - Docker **^24.0.7**
 - Docker Compose **^1.27.4**
 
