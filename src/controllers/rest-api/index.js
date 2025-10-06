@@ -70,7 +70,7 @@ class RESTControllers {
     // Attach the REST API Controllers associated with the /level route
     const levelRESTController = new LevelRESTController(dependencies)
     levelRESTController.attach(app)
-    
+
     // Attach the REST API Controllers associated with the /usage route
     const usageRESTController = new UsageRESTController(dependencies)
     usageRESTController.attach(app)
