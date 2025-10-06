@@ -48,10 +48,47 @@ class LevelRouter {
     }
 
     // Define the routes and attach the controller.
+    // Address routes
     this.router.post('/addr', this.levelRESTController.createAddr)
     this.router.get('/addr/:addr', this.levelRESTController.getAddr)
     this.router.put('/addr/:addr', this.levelRESTController.updateAddr)
     this.router.delete('/addr/:addr', this.levelRESTController.deleteAddr)
+
+    // Transaction routes
+    this.router.post('/tx', this.levelRESTController.createTx)
+    this.router.get('/tx/:txid', this.levelRESTController.getTx)
+    this.router.put('/tx/:txid', this.levelRESTController.updateTx)
+    this.router.delete('/tx/:txid', this.levelRESTController.deleteTx)
+
+    // Token routes
+    this.router.post('/token', this.levelRESTController.createToken)
+    this.router.get('/token/:tokenId', this.levelRESTController.getToken)
+    this.router.put('/token/:tokenId', this.levelRESTController.updateToken)
+    this.router.delete('/token/:tokenId', this.levelRESTController.deleteToken)
+
+    // Status routes
+    this.router.post('/status', this.levelRESTController.createStatus)
+    this.router.get('/status/:statusKey', this.levelRESTController.getStatus)
+    this.router.put('/status/:statusKey', this.levelRESTController.updateStatus)
+    this.router.delete('/status/:statusKey', this.levelRESTController.deleteStatus)
+
+    // Processed Transaction routes
+    this.router.post('/ptx', this.levelRESTController.createPTx)
+    this.router.get('/ptx/:ptxKey', this.levelRESTController.getPTx)
+    this.router.put('/ptx/:ptxKey', this.levelRESTController.updatePTx)
+    this.router.delete('/ptx/:ptxKey', this.levelRESTController.deletePTx)
+
+    // UTXO routes
+    this.router.post('/utxo', this.levelRESTController.createUtxo)
+    this.router.get('/utxo/:utxoKey', this.levelRESTController.getUtxo)
+    this.router.put('/utxo/:utxoKey', this.levelRESTController.updateUtxo)
+    this.router.delete('/utxo/:utxoKey', this.levelRESTController.deleteUtxo)
+
+    // Pin Claim routes
+    this.router.post('/pinclaim', this.levelRESTController.createPinClaim)
+    this.router.get('/pinclaim/:claimId', this.levelRESTController.getPinClaim)
+    this.router.put('/pinclaim/:claimId', this.levelRESTController.updatePinClaim)
+    this.router.delete('/pinclaim/:claimId', this.levelRESTController.deletePinClaim)
 
     // Attach the Controller routes to the Koa app.
     app.use(this.router.routes())
