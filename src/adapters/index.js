@@ -18,6 +18,7 @@ import JSONFiles from './json-files.js'
 import FullStackJWT from './fullstack-jwt.js'
 import config from '../../config/index.js'
 import Wallet from './wallet.adapter.js'
+import LevelDb from './level-db.js'
 
 class Adapters {
   constructor (localConfig = {}) {
@@ -34,10 +35,16 @@ class Adapters {
 
     // Get a valid JWT API key and instance bch-js.
     this.fullStackJwt = new FullStackJWT(config)
+
+    // Bind 'this' object to all subfunctions
+    this.openDatabases = this.openDatabases.bind(this)
   }
 
   async start () {
     try {
+      // Open the Level DB.
+      this.openDatabases()
+
       let apiToken
       if (this.config.getJwtAtStartup) {
         // Get a JWT token and instantiate bch-js with it. Then pass that instance
@@ -72,6 +79,25 @@ class Adapters {
       console.error('Error in adapters/index.js/start()')
       throw err
     }
+  }
+
+  openDatabases () {
+    // Open the indexer databases.
+    this.levelDb = new LevelDb()
+    const { addrDb, tokenDb, txDb, statusDb, pTxDb, utxoDb, pinClaimDb } =
+      this.levelDb.openDbs()
+
+    this.level = {
+      addrDb,
+      tokenDb,
+      txDb,
+      statusDb,
+      pTxDb,
+      utxoDb,
+      pinClaimDb
+    }
+
+    return { addrDb, tokenDb, txDb, statusDb, pTxDb, utxoDb, pinClaimDb }
   }
 }
 
