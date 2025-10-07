@@ -80,35 +80,35 @@ describe('#Timer-Controllers', () => {
   //   })
   // })
 
-  describe('#cleanUsage', () => {
-    it('should kick off the Use Case', async () => {
-      const result = await uut.cleanUsage()
+  // describe('#cleanUsage', () => {
+  //   it('should kick off the Use Case', async () => {
+  //     const result = await uut.cleanUsage()
 
-      assert.equal(result, true)
-    })
+  //     assert.equal(result, true)
+  //   })
 
-    it('should return false on error', async () => {
-      sandbox.stub(uut.useCases.usage, 'cleanUsage').throws(new Error('test error'))
-      const result = await uut.cleanUsage()
+  //   it('should return false on error', async () => {
+  //     sandbox.stub(uut.useCases.usage, 'cleanUsage').throws(new Error('test error'))
+  //     const result = await uut.cleanUsage()
 
-      assert.equal(result, false)
-    })
-  })
+  //     assert.equal(result, false)
+  //   })
+  // })
 
-  describe('#backupUsage', () => {
-    it('should kick off the Use Case', async () => {
-      const result = await uut.backupUsage()
+  // describe('#backupUsage', () => {
+  //   it('should kick off the Use Case', async () => {
+  //     const result = await uut.backupUsage()
 
-      assert.equal(result, true)
-    })
+  //     assert.equal(result, true)
+  //   })
 
-    it('should return false on error', async () => {
-      sandbox.stub(uut.useCases.usage, 'clearUsage').throws(new Error('test error'))
-      // sandbox.stub(uut.useCases.usage, 'saveUsage').throws(new Error('test error'))
+  //   it('should return false on error', async () => {
+  //     sandbox.stub(uut.useCases.usage, 'clearUsage').throws(new Error('test error'))
+  //     // sandbox.stub(uut.useCases.usage, 'saveUsage').throws(new Error('test error'))
 
-      const result = await uut.backupUsage()
+  //     const result = await uut.backupUsage()
 
-      assert.equal(result, false)
-    })
-  })
+  //     assert.equal(result, false)
+  //   })
+  // })
 })

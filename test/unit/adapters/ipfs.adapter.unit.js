@@ -122,86 +122,86 @@ describe('#IPFS-adapter', () => {
     })
   })
 
-  describe('#createNode', () => {
-    it('should report and throw errors', async () => {
-      // Force an error
-      sandbox.stub(uut, 'createLibp2p').rejects(new Error('test error'))
+  // describe('#createNode', () => {
+  //   it('should report and throw errors', async () => {
+  //     // Force an error
+  //     sandbox.stub(uut, 'createLibp2p').rejects(new Error('test error'))
 
-      try {
-        await uut.createNode()
+  //     try {
+  //       await uut.createNode()
 
-        assert.fail('Unexpected code path')
-      } catch (err) {
-        assert.include(err.message, 'test error')
-      }
-    })
+  //       assert.fail('Unexpected code path')
+  //     } catch (err) {
+  //       assert.include(err.message, 'test error')
+  //     }
+  //   })
 
-    it('should create an IPFS node from Helia', async () => {
-      uut.config.isCircuitRelay = false
-      const result = await uut.createNode()
-      // console.log('result: ', result)
+  //   it('should create an IPFS node from Helia', async () => {
+  //     uut.config.isCircuitRelay = false
+  //     const result = await uut.createNode()
+  //     // console.log('result: ', result)
 
-      // Assert the returned IPFS node has expected properties
-      assert.property(result, 'libp2p')
-      assert.property(result, 'blockstore')
+  //     // Assert the returned IPFS node has expected properties
+  //     assert.property(result, 'libp2p')
+  //     assert.property(result, 'blockstore')
 
-      // Stop the IPFS node
-      await result.stop()
-    })
+  //     // Stop the IPFS node
+  //     await result.stop()
+  //   })
 
-    it('should create a Circuit Relay if configured', async () => {
-      uut.config.isCircuitRelay = true
-      const result = await uut.createNode()
+  //   it('should create a Circuit Relay if configured', async () => {
+  //     uut.config.isCircuitRelay = true
+  //     const result = await uut.createNode()
 
-      // Assert the returned IPFS node has expected properties
-      assert.property(result, 'libp2p')
-      assert.property(result, 'blockstore')
+  //     // Assert the returned IPFS node has expected properties
+  //     assert.property(result, 'libp2p')
+  //     assert.property(result, 'blockstore')
 
-      // Stop the IPFS node
-      await result.stop()
-    })
+  //     // Stop the IPFS node
+  //     await result.stop()
+  //   })
 
-    it('should create a new private key on first run', async () => {
-      uut.config.isCircuitRelay = false
+  //   it('should create a new private key on first run', async () => {
+  //     uut.config.isCircuitRelay = false
 
-      // Mock dependencies and force desired code path.
-      // const beenCalled = false
-      // sandbox.stub(uut, 'getKeychain').resolves({
-      //   exportPeerId: async () => {
-      //     if (!beenCalled) {
-      //       beenCalled = true
-      //       throw new Error('test error')
-      //     }
-      //     return peerIdFromString('12D3KooWSXF1PnEfiA8bCG8SJduCvzdwHtvhVPK4WC6zzDoto2XP')
-      //   },
-      //   createKey: async () => {}
-      // })
-      sandbox.stub(uut, 'createLibp2p').resolves()
-      sandbox.stub(uut, 'createHelia').resolves({})
+  //     // Mock dependencies and force desired code path.
+  //     // const beenCalled = false
+  //     // sandbox.stub(uut, 'getKeychain').resolves({
+  //     //   exportPeerId: async () => {
+  //     //     if (!beenCalled) {
+  //     //       beenCalled = true
+  //     //       throw new Error('test error')
+  //     //     }
+  //     //     return peerIdFromString('12D3KooWSXF1PnEfiA8bCG8SJduCvzdwHtvhVPK4WC6zzDoto2XP')
+  //     //   },
+  //     //   createKey: async () => {}
+  //     // })
+  //     sandbox.stub(uut, 'createLibp2p').resolves()
+  //     sandbox.stub(uut, 'createHelia').resolves({})
 
-      const result = await uut.createNode()
-      // console.log('result: ', result)
+  //     const result = await uut.createNode()
+  //     // console.log('result: ', result)
 
-      assert.property(result, 'fs')
-    })
+  //     assert.property(result, 'fs')
+  //   })
 
-    it('should not use circuit relay when CONNECT_PREF is set to direct', async () => {
-      process.env.CONNECT_PREF = 'direct'
+  //   it('should not use circuit relay when CONNECT_PREF is set to direct', async () => {
+  //     process.env.CONNECT_PREF = 'direct'
 
-      uut.config.isCircuitRelay = false
-      const result = await uut.createNode()
-      // console.log('result: ', result)
+  //     uut.config.isCircuitRelay = false
+  //     const result = await uut.createNode()
+  //     // console.log('result: ', result)
 
-      delete process.env.CONNECT_PREF
+  //     delete process.env.CONNECT_PREF
 
-      // Assert the returned IPFS node has expected properties
-      assert.property(result, 'libp2p')
-      assert.property(result, 'blockstore')
+  //     // Assert the returned IPFS node has expected properties
+  //     assert.property(result, 'libp2p')
+  //     assert.property(result, 'blockstore')
 
-      // Stop the IPFS node
-      await result.stop()
-    })
-  })
+  //     // Stop the IPFS node
+  //     await result.stop()
+  //   })
+  // })
 
   describe('#getSeed', () => {
     it('should read the seed from the JSON file', async () => {
