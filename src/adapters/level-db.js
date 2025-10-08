@@ -93,6 +93,12 @@ class LevelDb {
     // Signal that the databases were close successfully.
     return true
   }
+
+  async backupDb () {
+  }
+
+  async restoreDb () {
+  }
 }
 
 // module.exports = LevelDb

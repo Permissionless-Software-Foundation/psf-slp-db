@@ -57,6 +57,8 @@ class LevelRESTControllerLib {
     this.createPinClaim = this.createPinClaim.bind(this)
     this.updatePinClaim = this.updatePinClaim.bind(this)
     this.deletePinClaim = this.deletePinClaim.bind(this)
+    this.backup = this.backup.bind(this)
+    this.restore = this.restore.bind(this)
   }
 
   // DRY error handler
@@ -883,6 +885,30 @@ class LevelRESTControllerLib {
       }
     } catch (err) {
       wlogger.error('Error in level/controller.js/deletePinClaim(): ', err)
+      this.handleError(ctx, err)
+    }
+  }
+
+  // Backup the DB.
+  async backup (ctx) {
+    try {
+      // await this.adapters.dbBackup.backupDb()
+      console.log('Backuping DB...')
+      process.exit(0)
+    } catch (err) {
+      wlogger.error('Error in level/controller.js/backup(): ', err)
+      this.handleError(ctx, err)
+    }
+  }
+
+  // Restore the DB.
+  async restore (ctx) {
+    try {
+      // await this.adapters.dbBackup.restoreDb()
+      console.log('Restoring DB...')
+      process.exit(0)
+    } catch (err) {
+      wlogger.error('Error in level/controller.js/restore(): ', err)
       this.handleError(ctx, err)
     }
   }
