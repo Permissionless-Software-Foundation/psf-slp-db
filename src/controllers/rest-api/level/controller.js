@@ -471,23 +471,23 @@ class LevelRESTControllerLib {
   }
 
   /**
-   * @api {put} /level/status/:statusKey Update an existing status entry in LevelDB
+   * @api {put} /level/status Update the indexer status in LevelDB
    * @apiPermission public
    * @apiName UpdateLevelStatus
    * @apiGroup REST Level
    *
-   * @apiParam {String} statusKey Status key to update
-   * @apiParam {Object} statusData Updated status data
+   * @apiParam {Object} statusData Status data containing startBlockHeight, syncedBlockHeight, and chainTipHeight
    *
    * @apiExample Example usage:
-   * curl -H "Content-Type: application/json" -X PUT -d '{ "statusData": { "height": 800001, "timestamp": 1234567891, "processed": 1500 } }' localhost:5001/level/status/lastBlockHeight
+   * curl -H "Content-Type: application/json" -X PUT -d '{ "statusData": { "startBlockHeight": 543376, "syncedBlockHeight": 800001, "chainTipHeight": 800002 } }' localhost:5001/level/status
    *
-   * @apiSuccess {String} statusKey Status key
+   * @apiSuccess {String} statusKey Status key (always "status")
    * @apiSuccess {Boolean} success Success status
    */
   async updateStatus (ctx) {
     try {
-      const { statusKey } = ctx.params
+      // const { statusKey } = ctx.params
+      const statusKey = 'status'
       const { statusData } = ctx.request.body
 
       await this.adapters.level.statusDb.put(statusKey, statusData)

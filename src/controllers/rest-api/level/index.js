@@ -69,7 +69,7 @@ class LevelRouter {
     // Status routes
     this.router.post('/status', this.levelRESTController.createStatus)
     this.router.get('/status/:statusKey', this.levelRESTController.getStatus)
-    this.router.put('/status/:statusKey', this.levelRESTController.updateStatus)
+    this.router.put('/status', this.levelRESTController.updateStatus)
     this.router.delete('/status/:statusKey', this.levelRESTController.deleteStatus)
 
     // Processed Transaction routes
