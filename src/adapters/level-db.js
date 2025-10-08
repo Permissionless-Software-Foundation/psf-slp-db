@@ -3,7 +3,8 @@
 */
 
 // Public npm libraries.
-import { Level } from 'level'
+// import { Level } from 'level'
+import level from 'level'
 
 // Hack to get __dirname back.
 // https://blog.logrocket.com/alternatives-dirname-node-js-es-modules/
@@ -11,30 +12,30 @@ import * as url from 'url'
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 class LevelDb {
-  // constructor (localConfig = {}) {
-  //   // Encapsulate dependencies
-  //   // this.level = level
-  // }
+  constructor (localConfig = {}) {
+    // Encapsulate dependencies
+    this.level = level
+  }
 
   openDbs () {
     // Instantiate LevelDB databases
     console.log('Opening LevelDB databases...')
 
     // Address database. Tracks the balances of addresses.
-    this.addrDb = new Level(`${__dirname.toString()}/../../leveldb/current/addrs`, {
+    this.addrDb = this.level(`${__dirname.toString()}/../../leveldb/current/addrs`, {
       valueEncoding: 'json',
       cacheSize: 1 * 1024 * 1024 * 1024 // 1 GB
     })
 
     // Transaction database. Acts as a cache, to reduce the amount of network
     // calls and computation.
-    this.txDb = new Level(`${__dirname.toString()}/../../leveldb/current/txs`, {
+    this.txDb = this.level(`${__dirname.toString()}/../../leveldb/current/txs`, {
       valueEncoding: 'json',
       cacheSize: 1 * 1024 * 1024 * 1024 // 1 GB
     })
 
     // Token Stats database.
-    this.tokenDb = new Level(
+    this.tokenDb = this.level(
       `${__dirname.toString()}/../../leveldb/current/tokens`,
       {
         valueEncoding: 'json'
@@ -42,7 +43,7 @@ class LevelDb {
     )
 
     // Tracks the sync status of the indexer.
-    this.statusDb = new Level(
+    this.statusDb = this.level(
       `${__dirname.toString()}/../../leveldb/current/status`,
       {
         valueEncoding: 'json'
@@ -51,7 +52,7 @@ class LevelDb {
 
     // Processed transaction database. Used to detect transactions that have
     // already been processed.
-    this.pTxDb = new Level(`${__dirname.toString()}/../../leveldb/current/ptxs`, {
+    this.pTxDb = this.level(`${__dirname.toString()}/../../leveldb/current/ptxs`, {
       valueEncoding: 'json'
     })
 
@@ -60,12 +61,12 @@ class LevelDb {
     // and the value is the vout and address. This can be used to lookup what
     // address possesses the UTXO. This makes handling of 'controlled burn' txs
     // much faster.
-    this.utxoDb = new Level(`${__dirname.toString()}/../../leveldb/current/utxos`, {
+    this.utxoDb = this.level(`${__dirname.toString()}/../../leveldb/current/utxos`, {
       valueEncoding: 'json'
     })
 
     // Pin Claims are on-chain payments for pinning IPFS content.
-    this.pinClaimDb = new Level(`${__dirname.toString()}/../../leveldb/current/pinClaim`, {
+    this.pinClaimDb = this.level(`${__dirname.toString()}/../../leveldb/current/pinClaim`, {
       valueEncoding: 'json'
     })
 
