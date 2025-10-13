@@ -892,13 +892,21 @@ class LevelRESTControllerLib {
   // Backup the DB.
   async backup (ctx) {
     try {
+      const { height, epoch } = ctx.request.body
+      console.log('height: ', height)
+      console.log('epoch: ', epoch)
+
       // await this.adapters.dbBackup.backupDb()
       console.log('Backuping DB...')
       // process.exit(0)
 
-      await this.adapters.dbBackup.backupDb()
+      await this.adapters.dbBackup.zipDb(height, epoch)
 
       console.log('...Finished database backup.')
+
+      ctx.body = {
+        success: true
+      }
     } catch (err) {
       wlogger.error('Error in level/controller.js/backup(): ', err)
       this.handleError(ctx, err)

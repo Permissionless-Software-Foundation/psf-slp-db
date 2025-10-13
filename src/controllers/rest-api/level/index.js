@@ -91,7 +91,7 @@ class LevelRouter {
     this.router.delete('/pinclaim/:claimId', this.levelRESTController.deletePinClaim)
 
     // Routes for DB backup and restore
-    this.router.get('/backup', this.levelRESTController.backup)
+    this.router.post('/backup', this.levelRESTController.backup)
     this.router.post('/restore', this.levelRESTController.restore)
 
     // Attach the Controller routes to the Koa app.
