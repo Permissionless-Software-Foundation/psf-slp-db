@@ -894,7 +894,11 @@ class LevelRESTControllerLib {
     try {
       // await this.adapters.dbBackup.backupDb()
       console.log('Backuping DB...')
-      process.exit(0)
+      // process.exit(0)
+
+      await this.adapters.dbBackup.backupDb()
+
+      console.log('...Finished database backup.')
     } catch (err) {
       wlogger.error('Error in level/controller.js/backup(): ', err)
       this.handleError(ctx, err)

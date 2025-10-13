@@ -17,7 +17,7 @@ import config from '../../config/index.js'
 import * as url from 'url'
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
-const dbDir = `${__dirname.toString()}/../../../../leveldb`
+const dbDir = `${__dirname.toString()}../../leveldb`
 
 class DbBackup {
   constructor (localConfig = {}) {

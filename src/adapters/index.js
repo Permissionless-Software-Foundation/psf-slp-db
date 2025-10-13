@@ -33,7 +33,6 @@ class Adapters {
     this.bchjs = new BCHJS()
     this.config = config
     this.wallet = new Wallet(localConfig)
-    this.dbBackup = new DbBackup(localConfig)
 
     // Get a valid JWT API key and instance bch-js.
     this.fullStackJwt = new FullStackJWT(config)
@@ -98,6 +97,8 @@ class Adapters {
       utxoDb,
       pinClaimDb
     }
+
+    this.dbBackup = new DbBackup(this.level)
 
     return { addrDb, tokenDb, txDb, statusDb, pTxDb, utxoDb, pinClaimDb }
   }
