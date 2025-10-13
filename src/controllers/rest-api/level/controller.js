@@ -88,7 +88,7 @@ class LevelRESTControllerLib {
    */
   async getAddr (ctx) {
     try {
-      const addr = ctx.params
+      const addr = ctx.params.addr
 
       const result = await this.adapters.level.addrDb.get(addr)
 
