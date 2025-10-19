@@ -5,7 +5,12 @@
   0x41 = 65 = Child NFT
 */
 
-const level = require('level')
+// const level = require('level')
+import level from 'level'
+
+// Hack to get __dirname back.
+import * as url from 'url'
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 const tokenDb = level(`${__dirname.toString()}/../../leveldb/current/tokens`, {
   valueEncoding: 'json'
