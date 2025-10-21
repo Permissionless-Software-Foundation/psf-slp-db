@@ -37,6 +37,12 @@ class DbBackup {
 
     // Create the backup directory if it doesn't already exist.
     // this.shell.mkdir(`${dbDir}/backup`)
+
+    // Bind 'this' object to all subfunctions
+    this.backupDb = this.backupDb.bind(this)
+    this.restoreDb = this.restoreDb.bind(this)
+    this.zipDb = this.zipDb.bind(this)
+    this.unzipDb = this.unzipDb.bind(this)
   }
 
   // Backup the LevelDB.
@@ -185,6 +191,7 @@ class DbBackup {
       this.shell.exec(`unzip slp-indexer-${height}.zip`)
 
       // Restore the backup
+      this.shell.cd(`${dbDir}/../`)
       this.shell.exec('./restore-auto.sh')
 
       return true

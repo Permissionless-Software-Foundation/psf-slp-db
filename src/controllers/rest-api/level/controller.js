@@ -916,8 +916,12 @@ class LevelRESTControllerLib {
   // Restore the DB.
   async restore (ctx) {
     try {
-      // await this.adapters.dbBackup.restoreDb()
-      console.log('Restoring DB...')
+      const { height } = ctx.request.body
+      console.log('Restoring DB to height: ', height)
+
+      await this.adapters.dbBackup.unzipDb(height)
+
+      console.log('Killing process, expecting process manager to restart this app.')
       process.exit(0)
     } catch (err) {
       wlogger.error('Error in level/controller.js/restore(): ', err)
