@@ -65,14 +65,7 @@ class Server {
       // MIDDLEWARE START
 
       app.use(convert(logger()))
-      // Bodies need to be large because some addresses accumulate huge numbers
-      // of UTXOs, which causes very large POST bodies. DOS attack should not
-      // be possible since communication is restricted to within this app.
-      app.use(bodyParser({
-        jsonLimit: '100mb', // Increase JSON body limit
-        formLimit: '100mb', // Increase form body limit
-        textLimit: '100mb' // Increase text body limit
-      }))
+      app.use(bodyParser())
       app.use(session())
       app.use(errorMiddleware())
       app.use(usageMiddleware())
