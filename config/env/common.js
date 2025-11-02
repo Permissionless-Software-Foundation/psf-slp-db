@@ -160,5 +160,8 @@ export default {
   disableNewAccounts: process.env.DISABLE_NEW_ACCOUNTS ? true : false,
 
   // Admin password
-  adminPassword: process.env.ADMIN_PASSWORD
+  adminPassword: process.env.ADMIN_PASSWORD,
+
+  // Number of backup zip files to retain.
+  backupQty: process.env.BACKUP_QTY ? parseInt(process.env.BACKUP_QTY) : 3
 }

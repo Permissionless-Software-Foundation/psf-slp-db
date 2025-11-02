@@ -19,6 +19,7 @@ import FullStackJWT from './fullstack-jwt.js'
 import config from '../../config/index.js'
 import Wallet from './wallet.adapter.js'
 import LevelDb from './level-db.js'
+import DbBackup from './db-backup.js'
 
 class Adapters {
   constructor (localConfig = {}) {
@@ -96,6 +97,8 @@ class Adapters {
       utxoDb,
       pinClaimDb
     }
+
+    this.dbBackup = new DbBackup(this.level)
 
     return { addrDb, tokenDb, txDb, statusDb, pTxDb, utxoDb, pinClaimDb }
   }

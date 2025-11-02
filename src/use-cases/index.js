@@ -25,7 +25,7 @@ class UseCases {
   // Run any startup Use Cases at the start of the app.
   async start () {
     // Load the usage stats from the database
-    await this.usage.loadUsage()
+    // await this.usage.loadUsage()
 
     console.log('Async Use Cases have been started.')
 

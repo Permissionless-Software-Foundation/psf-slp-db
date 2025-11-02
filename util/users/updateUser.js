@@ -2,10 +2,7 @@ import mongoose from 'mongoose'
 import config from '../../config/index.js'
 import User from '../../src/adapters/localdb/models/users.js'
 
-const EMAIL = process.env.EMAIL || 'test@test3.com'
-const PASSWORD = process.env.PASSWORD || 'pass'
-
-async function addUser () {
+async function getUsers () {
   // Connect to the Mongo Database.
   mongoose.Promise = global.Promise
   mongoose.set('useCreateIndex', true) // Stop deprecation warning.
@@ -14,24 +11,20 @@ async function addUser () {
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
 
-  const userData = {
-    email: EMAIL,
-    password: PASSWORD
-  }
+  // Find the user by email.
+  const user = await User.findOne({
+    email: 'test@test.com'
+  }, '-password')
 
-  const user = new User(userData)
+  // Update the users password
+  // user.password = 'newpassword'
 
-  // Enforce default value of 'user'
-  user.type = 'user'
+  // Change the user to an admin
+  // user.type = 'admin'
 
+  // Save the changes to the database.
   await user.save()
 
-  await mongoose.connection.close()
-
-  console.log(`User ${EMAIL} created.`)
+  mongoose.connection.close()
 }
-addUser()
-
-export default {
-  addUser
-}
+getUsers()
