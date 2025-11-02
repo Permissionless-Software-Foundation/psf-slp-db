@@ -85,6 +85,10 @@ class Adapters {
   openDatabases () {
     // Open the indexer databases.
     this.levelDb = new LevelDb()
+
+    // Ensure the expected directory structure exists.
+    this.levelDb.ensureDirectories()
+
     const { addrDb, tokenDb, txDb, statusDb, pTxDb, utxoDb, pinClaimDb } =
       this.levelDb.openDbs()
 
