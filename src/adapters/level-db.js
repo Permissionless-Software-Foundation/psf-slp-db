@@ -105,13 +105,13 @@ class LevelDb {
   }
 
   // Use the shell.js library to ensure the expected directory structure exists.
-  async ensureDirectories() {
+  async ensureDirectories () {
     try {
       this.shell.mkdir('-p', `${dbDir}/current`)
       this.shell.mkdir('-p', `${dbDir}/zips`)
 
       return true
-    } catch(err) {
+    } catch (err) {
       console.error('Error in ensureDirectories()')
       throw err
     }

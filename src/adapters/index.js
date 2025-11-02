@@ -83,7 +83,6 @@ class Adapters {
   }
 
   openDatabases () {
-  
     // Open the indexer databases.
     this.levelDb = new LevelDb()
 
