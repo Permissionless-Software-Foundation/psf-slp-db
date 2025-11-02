@@ -5,16 +5,25 @@
 // Public npm libraries.
 // import { Level } from 'level'
 import level from 'level'
+import shell from 'shelljs'
 
 // Hack to get __dirname back.
 // https://blog.logrocket.com/alternatives-dirname-node-js-es-modules/
 import * as url from 'url'
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
+const dbDir = `${__dirname.toString()}/../../leveldb`
+
 class LevelDb {
   constructor (localConfig = {}) {
     // Encapsulate dependencies
     this.level = level
+    this.shell = shell
+
+    // Bind 'this' object to all subfunctions
+    this.openDbs = this.openDbs.bind(this)
+    this.closeDbs = this.closeDbs.bind(this)
+    this.ensureDirectories = this.ensureDirectories.bind(this)
   }
 
   openDbs () {
@@ -95,10 +104,17 @@ class LevelDb {
     return true
   }
 
-  async backupDb () {
-  }
+  // Use the shell.js library to ensure the expected directory structure exists.
+  async ensureDirectories() {
+    try {
+      this.shell.mkdir('-p', `${dbDir}/current`)
+      this.shell.mkdir('-p', `${dbDir}/zips`)
 
-  async restoreDb () {
+      return true
+    } catch(err) {
+      console.error('Error in ensureDirectories()')
+      throw err
+    }
   }
 }
 
