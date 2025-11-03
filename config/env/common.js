@@ -10,6 +10,8 @@
 
 /* eslint  no-unneeded-ternary:0 */
 
+import 'dotenv/config'
+
 // Hack to get __dirname back.
 // https://blog.logrocket.com/alternatives-dirname-node-js-es-modules/
 import * as url from 'url'

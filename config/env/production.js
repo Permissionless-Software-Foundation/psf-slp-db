@@ -7,6 +7,8 @@
   so as not to conflict with the default host port of 27017 for MongoDB.
 */
 
+import 'dotenv/config'
+
 export default {
   session: 'secret-boilerplate-token',
   token: 'secret-jwt-token',

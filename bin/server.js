@@ -19,10 +19,10 @@ import passport from 'koa-passport'
 import mount from 'koa-mount'
 import serve from 'koa-static'
 import cors from 'kcors'
+import 'dotenv/config'
 
 // Local libraries
 import config from '../config/index.js' // this first.
-
 import AdminLib from '../src/adapters/admin.js'
 import errorMiddleware from '../src/controllers/rest-api/middleware/error.js'
 import { usageMiddleware } from '../src/use-cases/usage-use-cases.js'

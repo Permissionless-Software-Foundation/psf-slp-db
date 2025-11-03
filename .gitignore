@@ -73,3 +73,4 @@ run-dev.sh
 wallet.json
 leveldb/
 logs/
+.env
