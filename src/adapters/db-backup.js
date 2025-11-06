@@ -188,7 +188,9 @@ class DbBackup {
       this.shell.rm('-rf', 'home')
 
       // Unzip a previous archive.
-      this.shell.exec(`unzip slp-indexer-${height}.zip`)
+      const zipFile = `slp-indexer-${height}.zip`
+      console.log(`Unzipping ${zipFile}`)
+      this.shell.exec(`unzip ${zipFile}`)
 
       // Restore the backup
       this.shell.cd(`${dbDir}/../`)
