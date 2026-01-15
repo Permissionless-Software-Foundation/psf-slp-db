@@ -108,4 +108,8 @@ const localdb = {
   }
 }
 
-export default { ipfs, localdb };
+const blacklist = {
+  checkBlacklist: () => false
+}
+
+export default { ipfs, localdb, blacklist };

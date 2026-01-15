@@ -1,0 +1,46 @@
+/*
+  This library controls blacklists.
+*/
+
+// local libraries
+import config from '../../config/index.js'
+
+class Blacklist {
+  constructor () {
+    // Encapsulate dependencies
+    this.config = config
+
+    this.blacklist = this.config.blacklist || []
+  }
+
+  // This function expects a token ID as input. It compares that token ID
+  // against the list of token IDs in the blacklist. It returns true if there
+  // is a match. Otherwise it returns false.
+  checkBlacklist (tokenId) {
+    try {
+      // Default value
+      let result = false
+
+      if (!this.blacklist || !Array.isArray(this.blacklist)) {
+        throw new Error('Error in checkBlacklist(): blacklist is not an array')
+      }
+
+      for (let i = 0; i < this.blacklist.length; i++) {
+        const thisToken = this.blacklist[i]
+
+        if (tokenId === thisToken) {
+          result = true
+          break
+        }
+      }
+
+      return result
+    } catch (err) {
+      console.error('Error in checkBlacklist()')
+      throw err
+    }
+  }
+}
+
+// module.exports = Blacklist
+export default Blacklist
