@@ -165,5 +165,8 @@ export default {
   adminPassword: process.env.ADMIN_PASSWORD,
 
   // Number of backup zip files to retain.
-  backupQty: process.env.BACKUP_QTY ? parseInt(process.env.BACKUP_QTY) : 3
+  backupQty: process.env.BACKUP_QTY ? parseInt(process.env.BACKUP_QTY) : 3,
+
+  // SLP Token blacklist - token IDs that should not be returned in API responses
+  blacklist: process.env.BLACKLIST ? process.env.BLACKLIST.split(',') : []
 }

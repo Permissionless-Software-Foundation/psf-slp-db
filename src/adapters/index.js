@@ -20,6 +20,8 @@ import config from '../../config/index.js'
 import Wallet from './wallet.adapter.js'
 import LevelDb from './level-db.js'
 import DbBackup from './db-backup.js'
+import Blacklist from './blacklist.js'
+import SlpQuery from './slp-query.js'
 
 class Adapters {
   constructor (localConfig = {}) {
@@ -30,12 +32,19 @@ class Adapters {
     this.passport = new Passport()
     this.nodemailer = new Nodemailer()
     this.jsonFiles = new JSONFiles()
-    this.bchjs = new BCHJS()
+    // Create a placeholder instance. This will be replaced in start() method
+    // with a properly configured instance.
+    this.bchjs = new BCHJS({
+      restURL: process.env.RESTURL || config.apiServer || 'https://bch.fullstack.cash/v6/'
+    })
     this.config = config
     this.wallet = new Wallet(localConfig)
 
     // Get a valid JWT API key and instance bch-js.
     this.fullStackJwt = new FullStackJWT(config)
+
+    // Instantiate blacklist adapter
+    this.blacklist = new Blacklist()
 
     // Bind 'this' object to all subfunctions
     this.openDatabases = this.openDatabases.bind(this)
@@ -103,6 +112,14 @@ class Adapters {
     }
 
     this.dbBackup = new DbBackup(this.level)
+
+    // Instantiate SLP query adapter with LevelDB databases
+    this.slpQuery = new SlpQuery({
+      addrDb,
+      tokenDb,
+      txDb,
+      statusDb
+    })
 
     return { addrDb, tokenDb, txDb, statusDb, pTxDb, utxoDb, pinClaimDb }
   }

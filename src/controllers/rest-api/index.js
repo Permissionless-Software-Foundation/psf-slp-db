@@ -15,6 +15,7 @@ import IpfsRESTController from './ipfs/index.js'
 import config from '../../../config/index.js'
 import LevelRESTController from './level/index.js'
 import UsageRESTController from './usage/index.js'
+import SlpRouter from './slp/index.js'
 
 class RESTControllers {
   constructor (localConfig = {}) {
@@ -74,6 +75,10 @@ class RESTControllers {
     // Attach the REST API Controllers associated with the /usage route
     const usageRESTController = new UsageRESTController(dependencies)
     usageRESTController.attach(app)
+
+    // Attach the REST API Controllers associated with the /slp route
+    const slpRouter = new SlpRouter(dependencies)
+    slpRouter.attach(app)
   }
 }
 

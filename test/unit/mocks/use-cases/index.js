@@ -57,6 +57,24 @@ class UsageUseCaseMock {
   }
 }
 
+class SlpUseCaseMock {
+  async getAddress(address) {
+    return {}
+  }
+
+  async getTx(txid) {
+    return {}
+  }
+
+  async getToken(tokenId, withTxHistory) {
+    return {}
+  }
+
+  async getStatus() {
+    return {}
+  }
+}
+
 class UseCasesMock {
   constuctor(localConfig = {}) {
     // this.user = new UserUseCaseMock(localConfig)
@@ -64,6 +82,7 @@ class UseCasesMock {
 
   user = new UserUseCaseMock()
   usage = new UsageUseCaseMock()
+  slp = new SlpUseCaseMock()
 }
 
 export default UseCasesMock;
