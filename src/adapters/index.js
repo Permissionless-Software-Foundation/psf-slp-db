@@ -32,7 +32,11 @@ class Adapters {
     this.passport = new Passport()
     this.nodemailer = new Nodemailer()
     this.jsonFiles = new JSONFiles()
-    this.bchjs = new BCHJS()
+    // Create a placeholder instance. This will be replaced in start() method
+    // with a properly configured instance.
+    this.bchjs = new BCHJS({
+      restURL: process.env.RESTURL || config.apiServer || 'https://bch.fullstack.cash/v6/'
+    })
     this.config = config
     this.wallet = new Wallet(localConfig)
 
