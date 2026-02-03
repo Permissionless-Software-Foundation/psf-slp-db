@@ -8,6 +8,7 @@
 
 // Global npm librares
 import shell from 'shelljs'
+import fs from 'fs'
 
 // Local libraries
 import config from '../../config/index.js'
@@ -168,6 +169,22 @@ class DbBackup {
   // Height must match a zip file.
   async unzipDb (height) {
     try {
+      // Check if the zip file exists before wiping the database
+      const zipFile = `slp-indexer-${height}.zip`
+      const zipFilePath = `${dbDir}/zips/${zipFile}`
+
+      if (!fs.existsSync(zipFilePath)) {
+        console.error(`Backup file not found: ${zipFile}`)
+
+        // If exitOnMissingBackup is enabled, exit without wiping database
+        if (this.config.exitOnMissingBackup) {
+          console.log('EXIT_ON_MISSING_BACKUP is set. Exiting instead of rolling back to genesis.')
+          process.exit(1)
+        }
+
+        // Otherwise, continue with the old behavior (wipe and fail)
+      }
+
       // Close the databases
       await this.addrDb.close()
       await this.tokenDb.close()
@@ -188,7 +205,6 @@ class DbBackup {
       this.shell.rm('-rf', 'home')
 
       // Unzip a previous archive.
-      const zipFile = `slp-indexer-${height}.zip`
       console.log(`Unzipping ${zipFile}`)
       this.shell.exec(`unzip ${zipFile}`)
 
