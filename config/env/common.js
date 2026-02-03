@@ -167,6 +167,9 @@ export default {
   // Number of backup zip files to retain.
   backupQty: process.env.BACKUP_QTY ? parseInt(process.env.BACKUP_QTY) : 3,
 
+  // Exit instead of rolling back to genesis if indexer is synced and backup is missing
+  exitOnMissingBackup: process.env.EXIT_ON_MISSING_BACKUP === 'true' ? true : false,
+
   // SLP Token blacklist - token IDs that should not be returned in API responses
   blacklist: process.env.BLACKLIST ? process.env.BLACKLIST.split(',') : []
 }
