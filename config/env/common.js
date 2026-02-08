@@ -138,28 +138,9 @@ export default {
   ipfsWebRtcPort: process.env.IPFS_WEB_RTC_PORT ? process.env.IPFS_WEB_RTC_PORT : 4005,
   connectPref: process.env.CONNECT_PREF, // Used in helia-coord to select connection preference.
 
-  // Settings for production, using external go-ipfs node.
-  isProduction: process.env.SVC_ENV === 'prod' ? true : false,
-  ipfsHost: process.env.IPFS_HOST ? process.env.IPFS_HOST : 'localhost',
-  ipfsApiPort: process.env.IPFS_API_PORT
-    ? parseInt(process.env.IPFS_API_PORT)
-    : 5001,
-
   chatPubSubChan: 'psf-ipfs-chat-001',
 
-  // This can add specific Circuit Relay v2 servers to connect to.
-  bootstrapRelays: [
-    // v2 Circuit Relay (Token Tiger)
-    // '/ip4/137.184.93.145/tcp/8001/p2p/12D3KooWGMEKkdJfyZbwdH9EafZbRTtMn7FnhWPrE4MhRty2763g',
-
-    // v2 Circuit Relay server (FullStack.cash)
-    // '/ip4/78.46.129.7/tcp/4001/p2p/12D3KooWFQ11GQ5NubsJGhYZ4X3wrAGimLevxfm6HPExCrMYhpSL'
-  ],
-
   // END IPFS CONFIGURATION
-
-  // Account Configuration
-  disableNewAccounts: process.env.DISABLE_NEW_ACCOUNTS ? true : false,
 
   // Admin password
   adminPassword: process.env.ADMIN_PASSWORD,
