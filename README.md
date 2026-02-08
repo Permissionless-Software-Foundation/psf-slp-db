@@ -19,15 +19,7 @@ The purpose of this code repository is to allow optimizations for parallel proce
 
 ### Production Environment
 
-The [docker](./production/docker) directory contains a Dockerfile for building a production deployment.
-
-```
-docker-compose pull
-docker-compose up -d
-```
-
-- You can bring the containers down with `docker-compose down`
-- You can bring the containers back up with `docker-compose up -d`.
+This app is included in the [psf-slp-indexer-g2](https://github.com/Permissionless-Software-Foundation/psf-slp-indexer-g2) production Docker containers. To run this app in production mode, follow the instructions in the README of that repository.
 
 ### Development Environment
 
