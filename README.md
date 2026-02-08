@@ -116,10 +116,6 @@ There is additional developer documentation in the [dev-docs directory](./dev-do
 - [ESLint](http://eslint.org/)
 - [ipfs-coord](https://www.npmjs.com/package/ipfs-coord)
 
-## IPFS
-
-Snapshots pinned to IPFS will be listed here.
-
 ## License
 
 [MIT](./LICENSE.md)
